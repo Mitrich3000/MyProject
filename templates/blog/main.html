@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Страница работы с блогом{% endblock %}
+{% block header_page %}
+    <br>
+    <h3>
+        <span class="header">Страница работы с блогом</span>
+    </h3>
+{% endblock header_page %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12" align="center">
+                <hr>
+                <h5>Список публикаций автора</h5><br>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="10">№пп</th>
+                        <th width="70%" style="text-align: center">Название</th>
+                        <th style="text-align: center">Редактировать</th>
+                        <th style="text-align: center">Удалить</th>
+                    </tr>
+                    </thead>
+                    {% if post_list %}
+                        {% for post in post_list %}
+                            <tbody>
+                            <tr>
+                                <th>{{ forloop.counter }}</th>
+                                <td>
+                                    <a class="nav-link"
+                                       href="{% url 'blog:detail' post.id %}">
+                                        {{ post.title }}
+                                    </a></td>
+                                <td align="center"><a class="nav-link"
+                                                      href="{% url 'blog:update' post.id %}">
+                                    Редактировать
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                                </td>
+                                <td align="center">
+                                    <a class="nav-link" href="{% url 'blog:delete' post.id %}">
+                                        Удалить
+                                        <span class="glyphicon glyphicon-remove" style="color: red"></span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+                <a class="nav-link" href="{% url 'blog:add' %}">Добавить публикацию</a>
+                <br>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <p align="center"><a href="javascript:history.go(-1)">Назад</a></p>
+    </div>
+    <br>
+{% endblock content %}

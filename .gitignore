@@ -1,0 +1,4 @@
+migrations/
+venv/
+/.git
+db.sqlite3

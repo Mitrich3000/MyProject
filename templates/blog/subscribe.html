@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Управление подписками{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12" align="center">
+        <div>
+{#            {% if object.owner == user %}#}
+                <form method="post" action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Обновить"/>
+                </form>
+{#            {% endif %}#}
+        </div>
+        <br>
+        <div align="center">
+            <a href="javascript:history.go(-1)" title="Назад">Назад</a>
+        </div>
+    </div>
+{% endblock %}

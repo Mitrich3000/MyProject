@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Добавление публикации{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12" align="center">
+        <form method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Добавить"/>
+        </form>
+        <br>
+        <a href="javascript:history.go(-1)" title="Назад">Назад</a>
+    </div>
+{% endblock %}

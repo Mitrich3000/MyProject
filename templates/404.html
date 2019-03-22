@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header_page %}
+    <div>
+        <br>
+        <h6>
+            <span class="text-effect">Страница не найдена</span>
+        </h6>
+        <br>
+    </div>
+{% endblock header_page %}
+
+{% block content %}
+    <div class="col-xs-12" align="center">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Извините, запрошенная Вами страница не найдена.
+            </div>
+        </div>
+        <div class="panel-footer">
+            <p align="center"><a href="javascript:history.go(-1)">Назад</a></p>
+        </div>
+    </div>
+{% endblock content %}

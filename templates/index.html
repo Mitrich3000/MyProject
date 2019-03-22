@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Персональная страница{% endblock %}
+
+{% block content %}
+    <div class="col-9" style="border: 5px">
+        <div class="card">
+            {% if news %}
+                {% for post in news %}
+                    <div class="" style="margin-bottom: 1px;">
+                        <div class="card-header" style="margin-top: 1px">
+                            <div>{{ post.posted }} <i>({{ post.blog }})</i></div>
+                        </div>
+                        <div class="content-title text-center">
+                            <br>
+                            <b><a href="{% url 'blog:detail' post.pk %}">{{ post.title }}</a></b>
+                        </div>
+                        <div class="" style="padding-bottom: 10px;padding-top: 3px;">
+                            <div class="text-justify mx-4">
+                                <p {% if user in post.readed_user.all %} style="color: #cecdc9;"
+                                {% endif %}>
+                                    {{ post.content }}</p>
+                            </div>
+                        </div>
+                        <div align="center" class="my-2">
+                            <a href="{% url 'blog:readed' post.id %}">
+                                <small>Прочитан</small>
+                            </a>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        {% if news.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ news.previous_page_number }}">Предыдущая</a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                        {% if news.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ news.next_page_number }}">Следующая</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-3" style="border: 1px">
+        <div class="panel panel-default">
+            <div class="card-header text-primary">Управление подписками</div>
+            <div class="card">
+                Текущие подписки:
+                {% if blogs %}
+                    <ul>
+                        {% for blog in blogs %}
+                            <li>{{ blog.title }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <a class="nav-link" href="{% url 'blog:subscribe' user.id %}">Изменить подписки</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

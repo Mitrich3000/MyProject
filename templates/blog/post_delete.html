@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Удаление публикации{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12" align="center">
+        <a href="javascript:history.go(-1)" title="Назад">Назад</a>
+        <br>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger">Вы действительно хотите удалить публикацию "{{ object }}"?</button>
+        </form>
+    <br>
+    </div>
+
+{% endblock %}

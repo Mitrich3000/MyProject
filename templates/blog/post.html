@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ object.title }} {% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 rules" align="justify">
+        <h5 class="text-effect" itemprop="title"> {{ object.title }}</h5>
+        <br>
+        <p> {{ object.content }}</p>
+        <p align="center"><a href="javascript:history.go(-1)">Назад</a></p>
+    </div>
+{% endblock %}
