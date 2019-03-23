@@ -10,7 +10,7 @@ from MyBlog import settings
 class Blog(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     title = models.CharField(max_length=100, unique=True)
-    subscribed = models.ManyToManyField(User, related_name='subscribed', null=True, blank=True)
+    subscribed = models.ManyToManyField(User, related_name='subscribed', blank=True)
     created = models.DateTimeField(db_index=True, auto_now_add=True)
 
     def __str__(self):
@@ -25,7 +25,7 @@ class Post(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     title = models.CharField('Заголовок', max_length=200)
     content = models.TextField('Текст')
-    readed_user = models.ManyToManyField(User, null=True, blank=True)
+    readed_user = models.ManyToManyField(User, blank=True)
     posted = models.DateTimeField(db_index=True, auto_now_add=True)
 
     def __str__(self):

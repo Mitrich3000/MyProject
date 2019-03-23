@@ -31,13 +31,13 @@ class Blog1Form(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     subscribed = forms.ModelMultipleChoiceField(queryset=Blog.objects.all(), label='Доступные блоги',
-                                           widget=forms.CheckboxSelectMultiple, required=False)
+                                                widget=forms.CheckboxSelectMultiple, required=False)
 
-    # display only available blogs
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
-        super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['subscribed'].queryset = Blog.objects.filter(subscribed=user)
+    # # display only available blogs
+    # def __init__(self, *args, **kwargs):
+    #     user = kwargs.pop('user', None)
+    #     super(UserForm, self).__init__(*args, **kwargs)
+    #     self.fields['subscribed'].queryset = Blog.objects.filter(subscribed=user).values_list('owner_id', flat=True)
 
     class Meta:
         model = User

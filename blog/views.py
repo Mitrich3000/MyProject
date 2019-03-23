@@ -80,8 +80,8 @@ class PostListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = Post.objects.filter(blog__owner__username=self.request.user).order_by('-posted')
-        print(queryset)
+        queryset = Post.objects.filter(blog__owner__username=self.request.user)
+
         return queryset
 
 
@@ -90,8 +90,13 @@ def subscribe(request, **kwargs):
     blogs = Blog.objects.filter(subscribed=request.user)
 
     # setting subscribe
-    form = UserForm()
+    # select = Blog.objects.filter(subscribed=request.user).values_list('owner_id', flat=True)
+    select = Blog.objects.filter(subscribed=request.user).prefetch_related('subscribed').values_list('subscribed__blog',
+                                                                                                     flat=True)
+    form = UserForm(initial={'subscribed': select})
+    form.save(commit=False)
     user = request.user
+    user.subscribed.clear()
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
